@@ -46,7 +46,10 @@ final class ReplApiImpl(
               .isAssignableFrom(classTagT.runtimeClass)
 
         val jvmReprDisplayer: Displayer[_] =
-          Displayers.registration().find(classTagT.runtimeClass)
+          if (classTagT != null)
+            Displayers.registration().find(classTagT.runtimeClass)
+          else defaultDisplayer
+
         val useJvmReprDisplay =
           jvmReprDisplayer ne defaultDisplayer
 
